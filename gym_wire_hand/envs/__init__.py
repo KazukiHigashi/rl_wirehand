@@ -1,0 +1,2 @@
+from gym_wire_hand.envs.wire_hand_env import WireHandEnv
+from gym_wire_hand.envs.wire_hand_goal_env import WireHandGoalEnv

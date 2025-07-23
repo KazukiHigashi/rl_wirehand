@@ -1,0 +1,462 @@
+<mujoco>
+  <compiler autolimits="true"/>
+  <option timestep="0.01" gravity="0 0 -9.81"/>
+
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
+    <material name="grid" texture="grid" texrepeat="10 10" texuniform="true" reflectance=".2"/>
+    <mesh name="palm" scale=".001 .001 .001"
+      vertex=" 70   70   8.17
+              -70   70   8.17
+               70   -70   8.17
+               -70   -70   8.17
+               70   70   6.17
+              -70   70   6.17
+               70   -70   6.17
+               -70   -70   6.17
+               0   70   -6.17
+               0   -70   -6.17"/>
+  </asset>
+
+  <default>
+    <joint type="hinge" axis="0 1 0" damping=".03" actuatorfrcrange="-0.5 0.5"/>
+    <default class="cross tate">
+      <geom type="box" size=".001 .001 .003" rgba="1 1 1 1" pos="0 0 -.003"/>
+    </default>
+    <default class="cross yoko">
+      <geom type="box" size=".01 .001 .001" rgba="1 1 1 1" pos="0 0 -.003"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <geom type="plane" size="3 3 .01" material="grid"/>
+    <body name="wirearm" pos="0 0 .3">
+      <light pos="0 0 2" diffuse="1 1 1" ambient="0.2 0.2 0.2"/>
+      <light name="top light" pos="0 0 2" mode="trackcom" diffuse=".4 .4 .4"/>
+      <geom name="palm" type="mesh" mesh="palm" rgba="1 1 1 1"/>
+      <body name="right link1" pos=".035 0 0" quat="0 -0.08716 0 0.99619" >
+        <joint name="right link1"/>
+        <geom class="cross tate"/>
+        <geom class="cross yoko"/>
+        <body name="right link2" pos="0 0 -.006">
+          <joint name="right link2"/>
+          <geom class="cross tate"/>
+          <geom class="cross yoko"/>
+          <body name="right link3" pos="0 0 -.006">
+            <joint name="right link3"/>
+            <geom class="cross tate"/>
+            <geom class="cross yoko"/>
+            <body name="right link4" pos="0 0 -.006">
+              <joint name="right link4"/>
+              <geom class="cross tate"/>
+              <geom class="cross yoko"/>
+              <body name="right link5" pos="0 0 -.006">
+                <joint name="right link5"/>
+                <geom class="cross tate"/>
+                <geom class="cross yoko"/>
+                <body name="right link6" pos="0 0 -.006">
+                  <joint name="right link6"/>
+                  <geom class="cross tate"/>
+                  <geom class="cross yoko"/>
+                  <body name="right link7" pos="0 0 -.006">
+                    <joint name="right link7"/>
+                    <geom class="cross tate"/>
+                    <geom class="cross yoko"/>
+                    <body name="right link8" pos="0 0 -.006">
+                      <joint name="right link8"/>
+                      <geom class="cross tate"/>
+                      <geom class="cross yoko"/>
+                      <body name="right link9" pos="0 0 -.006">
+                        <joint name="right link9"/>
+                        <geom class="cross tate"/>
+                        <geom class="cross yoko"/>
+                        <body name="right link10" pos="0 0 -.006">
+                          <joint name="right link10"/>
+                          <geom class="cross tate"/>
+                          <geom class="cross yoko"/>
+                          <body name="right link11" pos="0 0 -.006">
+                            <joint name="right link11"/>
+                            <geom class="cross tate"/>
+                            <geom class="cross yoko"/>
+                            <body name="right link12" pos="0 0 -.006">
+                              <joint name="right link12"/>
+                              <geom class="cross tate"/>
+                              <geom class="cross yoko"/>
+                              <body name="right link13" pos="0 0 -.006">
+                                <joint name="right link13"/>
+                                <geom class="cross tate"/>
+                                <geom class="cross yoko"/>
+                                <body name="right link14" pos="0 0 -.006">
+                                  <joint name="right link14"/>
+                                  <geom class="cross tate"/>
+                                  <geom class="cross yoko"/>
+                                  <body name="right link15" pos="0 0 -.006">
+                                    <joint name="right link15"/>
+                                    <geom class="cross tate"/>
+                                    <geom class="cross yoko"/>
+                                    <body name="right link16" pos="0 0 -.006">
+                                      <joint name="right link16"/>
+                                      <geom class="cross tate"/>
+                                      <geom class="cross yoko"/>
+                                      <body name="right link17" pos="0 0 -.006">
+                                        <joint name="right link17"/>
+                                        <geom class="cross tate"/>
+                                        <geom class="cross yoko"/>
+                                        <body name="right link18" pos="0 0 -.006">
+                                          <joint name="right link18"/>
+                                          <geom class="cross tate"/>
+                                          <geom class="cross yoko"/>
+                                          <body name="right link19" pos="0 0 -.006">
+                                            <joint name="right link19"/>
+                                            <geom class="cross tate"/>
+                                            <geom class="cross yoko"/>
+                                            <body name="right link20" pos="0 0 -.006">
+                                              <joint name="right link20"/>
+                                              <geom class="cross tate"/>
+                                              <geom class="cross yoko"/>
+                                              <body name="right link21" pos="0 0 -.006">
+                                                <joint name="right link21"/>
+                                                <geom class="cross tate"/>
+                                                <geom class="cross yoko"/>
+                                                <body name="right link22" pos="0 0 -.006">
+                                                  <joint name="right link22"/>
+                                                  <geom class="cross tate"/>
+                                                  <geom class="cross yoko"/>
+                                                  <body name="right link23" pos="0 0 -.006">
+                                                    <joint name="right link23"/>
+                                                    <geom class="cross tate"/>
+                                                    <geom class="cross yoko"/>
+                                                    <body name="right link24" pos="0 0 -.006">
+                                                      <joint name="right link24"/>
+                                                      <geom class="cross tate"/>
+                                                      <geom class="cross yoko"/>
+                                                      <body name="right link25" pos="0 0 -.006">
+                                                        <joint name="right link25"/>
+                                                        <geom class="cross tate"/>
+                                                        <geom class="cross yoko"/>
+                                                        <body name="right link26" pos="0 0 -.006">
+                                                          <joint name="right link26"/>
+                                                          <geom class="cross tate"/>
+                                                          <geom class="cross yoko"/>
+                                                          <body name="right link27" pos="0 0 -.006">
+                                                            <joint name="right link27"/>
+                                                            <geom class="cross tate"/>
+                                                            <geom class="cross yoko"/>
+                                                            <body name="right link28" pos="0 0 -.006">
+                                                              <joint name="right link28"/>
+                                                              <geom class="cross tate"/>
+                                                              <geom class="cross yoko"/>
+                                                              <body name="right link29" pos="0 0 -.006">
+                                                                <joint name="right link29"/>
+                                                                <geom class="cross tate"/>
+                                                                <geom class="cross yoko"/>
+                                                                <body name="right link30" pos="0 0 -.006">
+                                                                  <joint name="right link30"/>
+                                                                  <geom class="cross tate"/>
+                                                                  <geom class="cross yoko"/>
+                                                                  <body name="right link31" pos="0 0 -.006">
+                                                                    <joint name="right link31"/>
+                                                                    <geom class="cross tate"/>
+                                                                    <geom class="cross yoko"/>
+                                                                    <body name="right link32" pos="0 0 -.006">
+                                                                      <joint name="right link32"/>
+                                                                      <geom class="cross tate"/>
+                                                                      <geom class="cross yoko"/>
+                                                                      <body name="right link33" pos="0 0 -.006">
+                                                                        <joint name="right link33"/>
+                                                                        <geom class="cross tate"/>
+                                                                        <geom class="cross yoko"/>
+                                                                        <body name="right link34" pos="0 0 -.006">
+                                                                          <joint name="right link34"/>
+                                                                          <geom class="cross tate"/>
+                                                                          <geom class="cross yoko"/>
+                                                                          <body name="right link35" pos="0 0 -.006">
+                                                                            <joint name="right link35"/>
+                                                                            <geom class="cross tate"/>
+                                                                            <geom class="cross yoko"/>
+                                                                          </body>
+                                                                        </body>
+                                                                      </body>
+                                                                    </body>
+                                                                  </body>
+                                                                </body>
+                                                              </body>
+                                                            </body>
+                                                          </body>
+                                                        </body>
+                                                      </body>
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="left link1" pos="-.035 0 0" quat="0.9962 0 0.0872 0">
+        <joint name="left link1"/>
+        <geom class="cross tate" pos="0 0 -.003"/>
+        <geom class="cross yoko" pos="0 0 -.003"/>
+        <body name="left link2" pos="0 0 -.006">
+          <joint name="left link2"/>
+          <geom class="cross tate"/>
+          <geom class="cross yoko"/>
+          <body name="left link3" pos="0 0 -.006">
+            <joint name="left link3"/>
+            <geom class="cross tate"/>
+            <geom class="cross yoko"/>
+            <body name="left link4" pos="0 0 -.006">
+              <joint name="left link4"/>
+              <geom class="cross tate"/>
+              <geom class="cross yoko"/>
+              <body name="left link5" pos="0 0 -.006">
+                <joint name="left link5"/>
+                <geom class="cross tate"/>
+                <geom class="cross yoko"/>
+                <body name="left link6" pos="0 0 -.006">
+                  <joint name="left link6"/>
+                  <geom class="cross tate"/>
+                  <geom class="cross yoko"/>
+                  <body name="left link7" pos="0 0 -.006">
+                    <joint name="left link7"/>
+                    <geom class="cross tate"/>
+                    <geom class="cross yoko"/>
+                    <body name="left link8" pos="0 0 -.006">
+                      <joint name="left link8"/>
+                      <geom class="cross tate"/>
+                      <geom class="cross yoko"/>
+                      <body name="left link9" pos="0 0 -.006">
+                        <joint name="left link9"/>
+                        <geom class="cross tate"/>
+                        <geom class="cross yoko"/>
+                        <body name="left link10" pos="0 0 -.006">
+                          <joint name="left link10"/>
+                          <geom class="cross tate"/>
+                          <geom class="cross yoko"/>
+                          <body name="left link11" pos="0 0 -.006">
+                            <joint name="left link11"/>
+                            <geom class="cross tate"/>
+                            <geom class="cross yoko"/>
+                            <body name="left link12" pos="0 0 -.006">
+                              <joint name="left link12"/>
+                              <geom class="cross tate"/>
+                              <geom class="cross yoko"/>
+                              <body name="left link13" pos="0 0 -.006">
+                                <joint name="left link13"/>
+                                <geom class="cross tate"/>
+                                <geom class="cross yoko"/>
+                                <body name="left link14" pos="0 0 -.006">
+                                  <joint name="left link14"/>
+                                  <geom class="cross tate"/>
+                                  <geom class="cross yoko"/>
+                                  <body name="left link15" pos="0 0 -.006">
+                                    <joint name="left link15"/>
+                                    <geom class="cross tate"/>
+                                    <geom class="cross yoko"/>
+                                    <body name="left link16" pos="0 0 -.006">
+                                      <joint name="left link16"/>
+                                      <geom class="cross tate"/>
+                                      <geom class="cross yoko"/>
+                                      <body name="left link17" pos="0 0 -.006">
+                                        <joint name="left link17"/>
+                                        <geom class="cross tate"/>
+                                        <geom class="cross yoko"/>
+                                        <body name="left link18" pos="0 0 -.006">
+                                          <joint name="left link18"/>
+                                          <geom class="cross tate"/>
+                                          <geom class="cross yoko"/>
+                                          <body name="left link19" pos="0 0 -.006">
+                                            <joint name="left link19"/>
+                                            <geom class="cross tate"/>
+                                            <geom class="cross yoko"/>
+                                            <body name="left link20" pos="0 0 -.006">
+                                              <joint name="left link20"/>
+                                              <geom class="cross tate"/>
+                                              <geom class="cross yoko"/>
+                                              <body name="left link21" pos="0 0 -.006">
+                                                <joint name="left link21"/>
+                                                <geom class="cross tate"/>
+                                                <geom class="cross yoko"/>
+                                                <body name="left link22" pos="0 0 -.006">
+                                                  <joint name="left link22"/>
+                                                  <geom class="cross tate"/>
+                                                  <geom class="cross yoko"/>
+                                                  <body name="left link23" pos="0 0 -.006">
+                                                    <joint name="left link23"/>
+                                                    <geom class="cross tate"/>
+                                                    <geom class="cross yoko"/>
+                                                    <body name="left link24" pos="0 0 -.006">
+                                                      <joint name="left link24"/>
+                                                      <geom class="cross tate"/>
+                                                      <geom class="cross yoko"/>
+                                                      <body name="left link25" pos="0 0 -.006">
+                                                        <joint name="left link25"/>
+                                                        <geom class="cross tate"/>
+                                                        <geom class="cross yoko"/>
+                                                        <body name="left link26" pos="0 0 -.006">
+                                                          <joint name="left link26"/>
+                                                          <geom class="cross tate"/>
+                                                          <geom class="cross yoko"/>
+                                                          <body name="left link27" pos="0 0 -.006">
+                                                            <joint name="left link27"/>
+                                                            <geom class="cross tate"/>
+                                                            <geom class="cross yoko"/>
+                                                            <body name="left link28" pos="0 0 -.006">
+                                                              <joint name="left link28"/>
+                                                              <geom class="cross tate"/>
+                                                              <geom class="cross yoko"/>
+                                                              <body name="left link29" pos="0 0 -.006">
+                                                                <joint name="left link29"/>
+                                                                <geom class="cross tate"/>
+                                                                <geom class="cross yoko"/>
+                                                                <body name="left link30" pos="0 0 -.006">
+                                                                  <joint name="left link30"/>
+                                                                  <geom class="cross tate"/>
+                                                                  <geom class="cross yoko"/>
+                                                                  <body name="left link31" pos="0 0 -.006">
+                                                                    <joint name="left link31"/>
+                                                                    <geom class="cross tate"/>
+                                                                    <geom class="cross yoko"/>
+                                                                    <body name="left link32" pos="0 0 -.006">
+                                                                      <joint name="left link32"/>
+                                                                      <geom class="cross tate"/>
+                                                                      <geom class="cross yoko"/>
+                                                                      <body name="left link33" pos="0 0 -.006">
+                                                                        <joint name="left link33"/>
+                                                                        <geom class="cross tate"/>
+                                                                        <geom class="cross yoko"/>
+                                                                        <body name="left link34" pos="0 0 -.006">
+                                                                          <joint name="left link34"/>
+                                                                          <geom class="cross tate"/>
+                                                                          <geom class="cross yoko"/>
+                                                                          <body name="left link35" pos="0 0 -.006">
+                                                                            <joint name="left link35"/>
+                                                                            <geom class="cross tate"/>
+                                                                            <geom class="cross yoko"/>
+                                                                          </body>
+                                                                        </body>
+                                                                      </body>
+                                                                    </body>
+                                                                  </body>
+                                                                </body>
+                                                              </body>
+                                                            </body>
+                                                          </body>
+                                                        </body>
+                                                      </body>
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+<actuator>
+  <position joint="right link1" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link2" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link3" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link4" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link5" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link6" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link7" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link8" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link9" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link10" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link11" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link12" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link13" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link14" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link15" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link16" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link17" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link18" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link19" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link20" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link21" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link22" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link23" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link24" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link25" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link26" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link27" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link28" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link29" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link30" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link31" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link32" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link33" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link34" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="right link35" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link1" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link2" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link3" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link4" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link5" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link6" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link7" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link8" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link9" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link10" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link11" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link12" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link13" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link14" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link15" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link16" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link17" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link18" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link19" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link20" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link21" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link22" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link23" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link24" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link25" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link26" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link27" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link28" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link29" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link30" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link31" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link32" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link33" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link34" ctrlrange="-0.35 0.35" gear="1"/>
+  <position joint="left link35" ctrlrange="-0.35 0.35" gear="1"/>
+</actuator>
+
+</mujoco>

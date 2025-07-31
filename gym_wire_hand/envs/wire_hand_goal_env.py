@@ -9,7 +9,7 @@ from mujoco import MjModel, MjData, mj_step, mj_resetData
 class WireHandGoalEnv(Env, EzPickle):
     metadata = {"render_modes": ["human"], "render_fps": 60}
 
-    def __init__(self, xml_path="gym_wire_hand/envs/wire_hand_damped.xml", render_mode="human"):
+    def __init__(self, xml_path="gym_wire_hand/envs/assets/wire_hand_damped.xml", render_mode="human"):
         EzPickle.__init__(self, xml_path, render_mode)
         self.model = MjModel.from_xml_path(xml_path)
         self.data = MjData(self.model)
@@ -69,9 +69,11 @@ class WireHandGoalEnv(Env, EzPickle):
         self.step_count += 1
 
         obs = self._get_obs()
+
+        info = { "is_success": self._is_success(obs["achieved_goal"], obs["desired_goal"]) }
         reward = self.compute_reward(obs["achieved_goal"], obs["desired_goal"], {})
         terminated = self.step_count >= self.max_steps
-        return obs, reward, terminated, False, {}
+        return obs, reward, terminated, False, info
 
     def _get_obs(self):
         obs = np.concatenate([
@@ -93,6 +95,21 @@ class WireHandGoalEnv(Env, EzPickle):
             "achieved_goal": achieved_goal,
             "desired_goal": desired_goal
         }
+
+    @staticmethod
+    def _is_success(achieved_goal, desired_goal):
+        achieved_goal = np.atleast_2d(achieved_goal)
+        desired_goal = np.atleast_2d(desired_goal)
+
+        lp = achieved_goal[:, :3]
+        rp = achieved_goal[:, 3:]
+        lgoal = desired_goal[:, :3]
+        rgoal = desired_goal[:, 3:]
+
+        dist_l = np.linalg.norm(lp - lgoal, axis=1)
+        dist_r = np.linalg.norm(rp - rgoal, axis=1)
+
+        return dist_l < 0.02 and dist_r < 0.02
 
     def compute_reward(self, achieved_goal, desired_goal, info):
         # shape = (batch_size, 6)

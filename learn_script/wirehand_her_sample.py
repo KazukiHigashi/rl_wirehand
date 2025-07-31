@@ -2,6 +2,8 @@ import os
 import gymnasium as gym
 import numpy as np
 
+import json
+
 from stable_baselines3 import SAC
 from stable_baselines3.her import HerReplayBuffer
 from stable_baselines3.her.goal_selection_strategy import GoalSelectionStrategy
@@ -10,10 +12,16 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.callbacks import EvalCallback
 
+from syn_learn.syn_sac import SynergySAC
 from gym_wire_hand.envs import WireHandGoalEnv  # GoalEnv対応済みであることが前提
+from syn_learn.pos_database import SynergyManager
 
-# ログ保存先
-log_dir = "./logs"
+
+# JSONファイルからログ情報を読み込む
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+log_dir = config["log_dir"]
 
 # チェックポイント保存設定
 checkpoint_callback = CheckpointCallback(
@@ -32,6 +40,8 @@ def make_env():
 env = DummyVecEnv([make_env])
 env = VecNormalize(env, norm_obs=True, norm_reward=True)
 
+pos_database = SynergyManager(num_axis=5, init_poslist=[], maxn_pos=200)
+
 # 普通のEnv
 # env = make_env()
 # env = WireHandGoalEnv()
@@ -41,7 +51,7 @@ env = VecNormalize(env, norm_obs=True, norm_reward=True)
 #                              deterministic=True, render=False)
 
 # SAC + HER のモデル設定
-model = SAC(
+model = SynergySAC(
     policy="MultiInputPolicy",  # GoalEnvはdict観測なのでMultiInput
     env=env,
     replay_buffer_class=HerReplayBuffer,
@@ -62,11 +72,15 @@ model = SAC(
     train_freq=(1, "step"),
     gradient_steps=1,
     target_update_interval=2,
+    pos_database=pos_database
     # ent_coef="auto_0.05"
 )
 
 # 学習の実行
 model.learn(total_timesteps=1_000_000, callback=[checkpoint_callback])
+
+np.save(os.path.join(log_dir,"resulted_poslist.npy"), pos_database.get_npylist()[0])
+np.save(os.path.join(log_dir,"resulted_targetlist.npy"), pos_database.get_npylist()[1])
 
 # # 環境とモデルの保存
 # env.save(os.path.join(log_dir, "vecnormalize.pkl"))

@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 # MJCFファイルをパース
-tree = ET.parse("wire_hand_nocollide.xml")
+tree = ET.parse("assets/wire_hand_nocollide.xml")
 root = tree.getroot()
 
 # damping値を設定

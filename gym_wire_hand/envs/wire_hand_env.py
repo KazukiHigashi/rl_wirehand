@@ -8,7 +8,7 @@ from gymnasium import Env, spaces
 class WireHandEnv(Env):
     metadata = {"render_modes": ["human"], "render_fps": 60}
 
-    def __init__(self, xml_path="gym_wire_hand/envs/wire_hand_damped.xml", render_mode="human"):
+    def __init__(self, xml_path="gym_wire_hand/envs/assets/wire_hand_damped.xml", render_mode="human"):
         self.model = MjModel.from_xml_path(xml_path)
         self.data = MjData(self.model)
 

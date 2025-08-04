@@ -19,7 +19,7 @@ class SynergyManager:
         self.pca = PCA(self.num_axis)
 
     def add_pos(self, pos, target_pos):
-        if len(self.pos_list) > self.maxn_pos:
+        if len(self.pos_list) >= self.maxn_pos:
             self._pop_pos()
         self.pos_list.append(pos)
         self.target_list.append(target_pos)

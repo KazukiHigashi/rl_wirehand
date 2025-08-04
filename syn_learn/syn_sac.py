@@ -92,7 +92,7 @@ class SynergySAC(SAC):
 
             if "is_success" in infos[0]:
                 if infos[0]["is_success"][0] and dones[0]:
-                    print(actions[0], new_obs["desired_goal"][0])
+                    # print(actions[0], new_obs["desired_goal"][0]) # displaying if success
                     self.pos_database.add_pos(actions[0], new_obs["desired_goal"][0])
 
             self.num_timesteps += env.num_envs
@@ -152,6 +152,7 @@ class SynergySAC(SAC):
         self.logger.record("time/fps", fps)
         self.logger.record("time/time_elapsed", int(time_elapsed), exclude="tensorboard")
         self.logger.record("time/total_timesteps", self.num_timesteps, exclude="tensorboard")
+
         if self.use_sde:
             self.logger.record("train/std", (self.actor.get_std()).mean().item())
 
@@ -159,6 +160,12 @@ class SynergySAC(SAC):
             self.logger.record("rollout/success_rate", safe_mean(self.ep_success_buffer))
 
         self.logger.record("synergy/success_pos_num", len(self.pos_database.pos_list))
+
+        if len(self.pos_database.pos_list) >= 20:
+            self.pos_database.calc_pca()
+            var_ratio_list = self.pos_database.get_variance_ratio()
+            for i, var_ratio in enumerate(var_ratio_list):
+                self.logger.record("synergy/pc{}".format(i+1), var_ratio)
 
         # Pass the number of timesteps for tensorboard
         self.logger.dump(step=self.num_timesteps)

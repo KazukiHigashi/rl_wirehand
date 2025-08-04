@@ -113,8 +113,21 @@ class WireHandGoalEnv(Env, EzPickle):
 
     def compute_reward(self, achieved_goal, desired_goal, info):
         # shape = (batch_size, 6)
+
         achieved_goal = np.atleast_2d(achieved_goal)
         desired_goal = np.atleast_2d(desired_goal)
+        if isinstance(info, list):
+            assert(isinstance(info[0], dict))
+            if "e" in info[0]:
+                error = np.array([a["e"] for a in info])
+            else:
+                error = np.zeros(len(info))
+        else:
+            assert(isinstance(info, dict))
+            if info != {}:
+                error = info["e"]
+            else:
+                error = 0
 
         lp = achieved_goal[:, :3]
         rp = achieved_goal[:, 3:]
@@ -127,10 +140,14 @@ class WireHandGoalEnv(Env, EzPickle):
         # reward = - (dist_l + dist_r)
         reward = -2
 
+        # シナジー（主成分空間）による再構成誤差をいい感じに0~1に変換
+        # 誤差が小さいほど1に近い，シナジー計算前(errorが全部0)の場合は1と設定
+        syn_rew_coeff = np.exp(-np.power(error,2)/50)
+
         # 成功報酬の追加（ブロードキャスト対応）
-        reward += (dist_l < 0.04) * 0.5
-        reward += (dist_r < 0.04) * 0.5
-        reward += ((dist_l < 0.02) & (dist_r < 0.02)) * 1.0
+        reward += (dist_l < 0.04) * syn_rew_coeff / 2
+        reward += (dist_r < 0.04) * syn_rew_coeff / 2
+        reward += ((dist_l < 0.02) & (dist_r < 0.02)) * syn_rew_coeff
 
         return reward
 

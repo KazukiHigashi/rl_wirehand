@@ -1,4 +1,4 @@
 {
-    "log_dir": "C:\\Users\\smasa\\Documents\\rl_wirehand_logs\\logs",
+    "log_dir": "Path\\To\\Your\\Logs",
     "step_n": 400000
 }

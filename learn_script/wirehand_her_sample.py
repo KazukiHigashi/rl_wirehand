@@ -11,9 +11,11 @@ from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.callbacks import EvalCallback
+from stable_baselines3.common.logger import configure
 
 from syn_learn.syn_sac import SynergySAC
 from syn_learn.syn_her import HerSynergyReplayBuffer
+from syn_learn.custom_logger import configure_separate_loggers
 from gym_wire_hand.envs import WireHandGoalEnv  # GoalEnv対応済みであることが前提
 from syn_learn.pos_database import SynergyManager
 
@@ -40,6 +42,8 @@ def make_env():
 
 pos_database = SynergyManager(num_axis=5, init_poslist=[], maxn_pos=200)
 resume = True  # Trueで再学習、Falseで新規学習
+
+logger = configure_separate_loggers(csv_folder="./csv_log", tb_folder="./tensorboard_log/")
 
 if resume:
     # ----- 再学習 -----
@@ -74,7 +78,7 @@ else:
             pos_database=pos_database
         ),
         verbose=1,
-        tensorboard_log="./tensorboard_log/",
+        # tensorboard_log="./tensorboard_log/",
         policy_kwargs=dict(net_arch=[2048, 2048, 1024]),
         batch_size=256,
         buffer_size=2**14,
@@ -87,6 +91,8 @@ else:
         target_update_interval=2,
         pos_database=pos_database
     )
+
+model.set_logger(logger)
 
 
 # 学習の実行
